@@ -4,7 +4,6 @@ var singleShake = 0;
 var finished = false;
 var maxEnergy= 1000; //max energy for eathquake
 
-
 var button1;
 var button2;
 var button3;
@@ -33,7 +32,15 @@ function setup() {
   
   
   function draw(){
+     background(204);
+     angleMode(DEGREES);
     
+     textSize(height/20);
+     textAlign(CENTER);
+     textStyle(BOLD);
+     fill(0);
+     noStroke();
+     text("SHAKE YOUR DEVICE", width/2,height - height/1.1);    
     
     var magnitude = int(map(energy, 0, 1000, 0, 10)); 
     
@@ -51,13 +58,7 @@ function setup() {
 
     //magnitude indication
     fill(0);
-    noStroke();   
-        
-    textSize(height/20);
-    textAlign(CENTER);
-    textStyle(BOLD);
-    text("EARTHQUAKE INTENSITY", width/2,height - height/1.1);   
-
+    noStroke();    
     
     textSize(height/40);
     textAlign(CENTER);
@@ -74,7 +75,19 @@ function setup() {
     textStyle(NORMAL);    
     text(energy, width/2, height - height/8);
         
-         //buttons 
+         //buttons  
+          
+    button1 = createButton("See results");
+    button1.position(width/7,(height/15)*14);
+    button1.touchStarted(results);
+        
+    button2 = createButton("Try again");
+    button2.position((width/7)*5, (height/15)*14);
+    button2.touchStarted(clearEverything);
+    
+   // button3 = createButton('imagens');
+   // button3.position(width/3,height/3);
+   // button3.touchStarted(imagens);    
         
     } else if (energy > maxEnergy) {
     //display things
@@ -106,9 +119,9 @@ function deviceShaken(){
    //energy += singleShake;
   //} else { finished == true;}
     
-   // HACER UN IF PARA CUANDO ES MENOR, PONER TEXTO PARA QUE LO INTENTE DE NUEVO CON MAS FUERZA
+   
     //create objects
-    for (var i = 0; i < energy*100; i++){
+    for (var i = 0; i < value*100; i++){
         dots.push(new QuakeDots());
     } 
     
@@ -117,7 +130,7 @@ function deviceShaken(){
 
 function QuakeDots(){ 
     var a = random(0,360);
-    var b = random(0,energy * 2);
+    var b = random(0,energy * 1.6);
     var x = sin(a) * b; // mi dà un numero che va da -b a b
     var y = cos(a) * b; // mi dà un numero che va da -b a b
     var d = dist(width/2,height/2, width/2, height/2 + x/2);
@@ -126,7 +139,7 @@ function QuakeDots(){
     
     this.xdot = random(width/2 - d, width/2 + d); //according to ellipse area
     this.ydot = random(height/2 - d, height/2 + d); //according to ellipse area
-    this.diameter = 3;
+    this.diameter = 6;
     this.speed = 4; //according to magnitude
         
 
@@ -145,7 +158,6 @@ this.display = function(){
 };
  
 }
-    
     
 function results() {
      button1.remove(button1);
