@@ -29,10 +29,13 @@ function setup() {
         
     button2 = createButton("Try again");
     button2.position((width/7)*5, (height/15)*14);
-    button2.touchStarted(setup);
+    button2.touchStarted(setup);}
   
   
-  var magnitude = int(map(energy, 0, 1000, 0, 10)); 
+  function draw(){
+    
+    
+    var magnitude = int(map(energy, 0, 1000, 0, 10)); 
     
     if (energy > 0 && energy < maxEnergy){
         
@@ -46,7 +49,54 @@ function setup() {
     strokeWeight(1);
     ellipse (x, y, r, r);
 
+    //magnitude indication
+    fill(0);
+    noStroke();   
+        
+    textSize(height/20);
+    textAlign(CENTER);
+    textStyle(BOLD);
+    text("EARTHQUAKE INTENSITY", width/2,height - height/1.1);   
+
+    
+    textSize(height/40);
+    textAlign(CENTER);
+    textStyle(NORMAL);
+    text("Magnitude", width/2, height - height/5);
+        
+    textSize(height/20);
+    textAlign(CENTER);
+    textStyle(BOLD);
+    text(magnitude,width/2, height - height/6.7);
+    
+    textSize(height/50);
+    textAlign(CENTER);
+    textStyle(NORMAL);    
+    text(energy, width/2, height - height/8);
+        
+         //buttons 
+        
+    } else if (energy > maxEnergy) {
+    //display things
+    background(0);
+  } else {
+    background(204);
+  }
+      
+   
+    //draw dots and given methods (actions)
+      noStroke();
+      fill(0);
+      for (var i = 0; i < energy * 100; i++){
+        dots[i].move();
+        dots[i]. display();
+        
+      }
+          
+
+
 }
+
 function deviceShaken(){
     
    singleShake = abs(accelerationX) + abs(accelerationY) + abs(accelerationZ);
