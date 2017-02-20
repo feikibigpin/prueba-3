@@ -151,7 +151,7 @@ function results() {
      button1.remove(button1);
      if( magnitude == 1 ){
        image(myChile,0,0,windowWidth,windowHeight);}
-     else if( magnitude ==0 ){
+     else if( magnitude ===0 ){
        image(myIndonesia,0,0,windowWidth,windowHeight);}
      else{
      image(myMexico,0,0,windowWidth,windowHeight);}
